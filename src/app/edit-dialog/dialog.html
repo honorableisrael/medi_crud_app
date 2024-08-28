@@ -1,0 +1,32 @@
+<style>
+  .create_dialog {
+    width: 500px;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .btn_width {
+    width: 150px;
+  }
+</style>
+<h6 mat-dialog-title>Edit Post</h6>
+<mat-dialog-content class="mat-typography">
+  <div class="create_dialog">
+    <div>
+      <mat-form-field class="full-width">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="" [(ngModel)]="title" value="title" />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="full-width">
+        <mat-label>Body</mat-label>
+        <input matInput placeholder="" [(ngModel)]="body" value="body" />
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" class="btn_width">Cancel</button>
+  <button mat-button cdkFocusInitial class="btn_width" (click)="editItem()">Update</button>
+</mat-dialog-actions>

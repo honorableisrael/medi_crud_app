@@ -12,12 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClient } from '@angular/common/http';
+import { ITable } from '../../types';
 
-export interface ITable {
-  body: string;
-  title: number;
-  userId: number;
-}
 /**
  * @title Basic use of `<table mat-table>`
  */
@@ -49,14 +45,13 @@ export class CreateDialog {
     const postData = {
       title: this.title,
       body: this.body,
-      userId: this.data.userId, // Assume userId is provided
+      userId: this.data.userId
     };
-
     this.http.post('https://jsonplaceholder.typicode.com/posts', postData)
       .subscribe(response => {
         console.log('Post created:', response);
         alert('successfully created post')
-        this.dialogRef.close(); // Close the dialog on success
+        this.dialogRef.close();
       }, error => {
         console.error('Error creating post:', error);
       });

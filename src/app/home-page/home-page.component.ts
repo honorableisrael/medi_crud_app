@@ -17,12 +17,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateDialog } from '../create-dialog/dialog';
 import { DeleteDialog } from '../delete-dialog/dialog';
+import { ITable } from '../../types';
+import { EditDialog } from '../edit-dialog/dialog';
 
-export interface ITable {
-  body: string;
-  title: number;
-  userId: number;
-}
 /**
  * @title Basic use of `<table mat-table>`
  */
@@ -78,6 +75,23 @@ export class HomePageComponent {
     const dialogRef = this.dialog.open(DeleteDialog, {
       data: { id }
     });
+
+    dialogRef.componentInstance.deleted.subscribe((deletedId: number) => {
+      this.dataSource = this.dataSource.filter(item => item.id !== deletedId);
+      this.cdr.markForCheck();
+    });
     dialogRef.afterClosed().subscribe((result) => {});
+  }
+  openEditDialog(selectedRow:ITable): void {
+    const dialogRef = this.dialog.open(EditDialog, {
+      data: { ...selectedRow }
+    });
+  
+    dialogRef.componentInstance.edited.subscribe((editedData: ITable) => {
+      this.dataSource = this.dataSource.map(item =>
+        item.id === editedData.id ? editedData : item
+      );
+      this.cdr.markForCheck();
+    });
   }
 }

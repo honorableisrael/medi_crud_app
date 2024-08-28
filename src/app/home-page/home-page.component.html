@@ -19,7 +19,7 @@
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
-          <i class="material-icons bg-blue" title="Edit Row" (click)="openDeleteDialog(element.id)">edit</i>
+          <i class="material-icons bg-blue" title="Edit Row" (click)="openEditDialog(element)">edit</i>
           <i class="material-icons bg-blue" title="Delete Row" (click)="openDeleteDialog(element.id)">delete</i>
         </td>
       </ng-container>

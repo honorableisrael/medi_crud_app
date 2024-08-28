@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import {MatButtonModule} from '@angular/material/button';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Output,
+} from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -28,27 +33,32 @@ import { HttpClient } from '@angular/common/http';
     MatDialogClose,
   ],
 })
-
 export class DeleteDialog {
+  @Output() deleted = new EventEmitter<string>();
   constructor(
     private http: HttpClient,
     private dialogRef: MatDialogRef<DeleteDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: { id: string } 
-  ) {} 
+    @Inject(MAT_DIALOG_DATA) public data: { id: string }
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   deleteItem(): void {
-    console.log(this.data)
-    this.http.delete(`https://jsonplaceholder.typicode.com/posts/${this.data.id}`) // Using the passed id
-      .subscribe(response => {
-        console.log('Delete created:', response);
-        alert('Successfully deleted post');
-        this.dialogRef.close(); // Close the dialog on success
-      }, error => {
-        console.error('Error deleting post:', error);
-      });
+    console.log(this.data);
+    this.http
+      .delete(`https://jsonplaceholder.typicode.com/posts/${this.data.id}`)
+      .subscribe(
+        (response) => {
+          console.log('Delete created:', response);
+          this.deleted.emit(this.data.id); 
+          alert('Successfully deleted post');
+          this.dialogRef.close(); 
+        },
+        (error) => {
+          console.error('Error deleting post:', error);
+        }
+      );
   }
 }
