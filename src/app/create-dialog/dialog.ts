@@ -47,6 +47,9 @@ export class CreateDialog {
       title: this.title,
       body: this.body,
     };
+    if(!this.title || !this.body){
+      return alert('All fields are required')
+    }
     this.http.post('https://jsonplaceholder.typicode.com/posts', postData)
       .subscribe(response => {
         alert('successfully created post')
