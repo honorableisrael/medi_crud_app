@@ -1,22 +1,51 @@
-<div class="navbar">PLACEHOLDER LIST <button class="btn-cls" mat-raised-button (click)="openCreateDialog()">Add Placeholder</button></div>
+<nav class="navigation" id="navigation">
+  <div class="container">
+    <div class="logo">CrudLogo</div>
+    <ul class="navigation-links">
+      <li>home</li>
+      <li>shop</li>
+      <li class="active">about</li>
+      <li>contact</li>
+      <a href="javascript:void(0);" class="icon" onclick="responsiveMenu()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </ul>
+  </div>
+</nav>
+<div class="top_wrapper">
+  <div>Placeholders</div>
+  <button class="btn-cls" mat-raised-button (click)="openCreateDialog()">
+    Add Placeholder
+  </button>
+</div>
 <div class="">
   <div class="pagecontent">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <!-- userId Column -->
-      <ng-container matColumnDef="title">
+      <ng-container matColumnDef="title" class="col_style">
         <th mat-header-cell *matHeaderCellDef>Title</th>
         <td mat-cell *matCellDef="let element">{{ element.title }}</td>
       </ng-container>
       <!-- body Column -->
-      <ng-container matColumnDef="body">
+      <ng-container matColumnDef="body" class="col_style">
         <th mat-header-cell *matHeaderCellDef>Body</th>
         <td mat-cell *matCellDef="let element">{{ element.body }}</td>
       </ng-container>
-      <ng-container matColumnDef="id">
+      <ng-container matColumnDef="id" class="col_style">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
-          <i class="material-icons bg-blue" title="Edit Row" (click)="openEditDialog(element)">edit</i>
-          <i class="material-icons bg-blue" title="Delete Row" (click)="openDeleteDialog(element.id)">delete</i>
+          <i
+            class="material-icons bg-blue"
+            title="Edit Row"
+            (click)="openEditDialog(element)"
+            >edit</i
+          >
+          <i
+            class="material-icons bg-blue"
+            title="Delete Row"
+            (click)="openDeleteDialog(element.id)"
+            >delete</i
+          >
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
