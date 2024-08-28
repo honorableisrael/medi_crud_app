@@ -17,7 +17,7 @@ describe('AppComponent', () => {
   it(`should have the 'placeholder-crud-app' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('placeholder-crud-app');
+    expect(app).toEqual('placeholder-crud-app');
   });
 
   it('should render title', () => {
