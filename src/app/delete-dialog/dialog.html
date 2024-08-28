@@ -1,0 +1,23 @@
+<style>
+  .create_dialog {
+    width: 500px;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .btn_width {
+    width: 150px;
+  }
+</style>
+<h6 mat-dialog-title>Confirm Action</h6>
+<mat-dialog-content class="mat-typography">
+  <div class="create_dialog">
+    <div>This action cannot be reversed</div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" class="btn_width">Cancel</button>
+  <button mat-button cdkFocusInitial class="btn_width" (click)="deleteItem()">
+    Delete
+  </button>
+</mat-dialog-actions>

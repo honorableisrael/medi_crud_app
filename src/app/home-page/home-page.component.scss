@@ -168,3 +168,32 @@
   .main{
     padding: 2rem;
   }
+
+  .navbar{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 2rem;
+    color: black;
+    font:600;
+    font-size: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pagecontent{
+    padding: 2rem;
+  }
+  .btn-cls{
+    font-size: 16px;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 1rem 1.5rem;
+    color: white;
+    border-radius: 5px;
+    font:900;
+    border: none;
+    background-color: rgb(36, 147, 191);
+    cursor: pointer;
+  }
+  .bg-blue{
+    color: rgb(38, 149, 192);
+    cursor: pointer;
+  }
