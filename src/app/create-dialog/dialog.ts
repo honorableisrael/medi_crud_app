@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, model, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, model, Output, signal } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
@@ -36,6 +36,7 @@ export class CreateDialog {
   title: string = '';
   body: string = ''; 
   readonly dialogRef = inject(MatDialogRef<any>);
+  @Output() created = new EventEmitter<ITable>();
   readonly data = inject<ITable>(MAT_DIALOG_DATA);
   constructor(private http: HttpClient) {} 
   onNoClick(): void {
@@ -45,12 +46,15 @@ export class CreateDialog {
     const postData = {
       title: this.title,
       body: this.body,
-      userId: this.data.userId
     };
     this.http.post('https://jsonplaceholder.typicode.com/posts', postData)
       .subscribe(response => {
-        console.log('Post created:', response);
         alert('successfully created post')
+        this.created.emit({
+          title: this.title,
+          body: this.body,
+          userId: Math.random(),
+        });
         this.dialogRef.close();
       }, error => {
         console.error('Error creating post:', error);

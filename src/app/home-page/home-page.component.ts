@@ -42,10 +42,9 @@ import { EditDialog } from '../edit-dialog/dialog';
 })
 export class HomePageComponent {
   title = 'Test';
-  readonly animal = signal('');
   readonly name = model('');
   readonly dialog = inject(MatDialog);
-  displayedColumns: string[] = ['userId', 'title', 'body', 'id'];
+  displayedColumns: string[] = [ 'title', 'body', 'id'];
   dataSource: ITable[] = [];
   constructor(
     private placeholderService: PlaceholderService,
@@ -59,36 +58,31 @@ export class HomePageComponent {
     });
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(CreateDialog, {
-      data: { name: this.name(), animal: this.animal() },
-    });
+  openCreateDialog(): void {
+    const dialogRef = this.dialog.open(CreateDialog);
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-        this.animal.set(result);
-      }
-    });
-  }
-  openDeleteDialog(id: string): void {
-    const dialogRef = this.dialog.open(DeleteDialog, {
-      data: { id }
-    });
-
-    dialogRef.componentInstance.deleted.subscribe((deletedId: number) => {
-      this.dataSource = this.dataSource.filter(item => item.id !== deletedId);
+    dialogRef.componentInstance.created.subscribe((newItem: ITable) => {
+      this.dataSource = [newItem, ...this.dataSource];
       this.cdr.markForCheck();
     });
-    dialogRef.afterClosed().subscribe((result) => {});
   }
-  openEditDialog(selectedRow:ITable): void {
-    const dialogRef = this.dialog.open(EditDialog, {
-      data: { ...selectedRow }
+
+  openDeleteDialog(id: string): void {
+    const dialogRef = this.dialog.open(DeleteDialog, {
+      data: { id },
     });
-  
+    dialogRef.componentInstance.deleted.subscribe((deletedId: number) => {
+      this.dataSource = this.dataSource.filter((item) => item.id !== deletedId);
+      this.cdr.markForCheck();
+    });
+  }
+  openEditDialog(selectedRow: ITable): void {
+    const dialogRef = this.dialog.open(EditDialog, {
+      data: { ...selectedRow },
+    });
+
     dialogRef.componentInstance.edited.subscribe((editedData: ITable) => {
-      this.dataSource = this.dataSource.map(item =>
+      this.dataSource = this.dataSource.map((item) =>
         item.id === editedData.id ? editedData : item
       );
       this.cdr.markForCheck();
