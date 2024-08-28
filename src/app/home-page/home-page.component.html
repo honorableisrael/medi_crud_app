@@ -1,4 +1,4 @@
-<div class="navbar">PLACEHOLDER LIST <button class="btn-cls" mat-raised-button (click)="openCreateDialog()">Add Post</button></div>
+<div class="navbar">PLACEHOLDER LIST <button class="btn-cls" mat-raised-button (click)="openCreateDialog()">Add Placeholder</button></div>
 <div class="">
   <div class="pagecontent">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -24,11 +24,3 @@
     </table>
   </div>
 </div>
-
-<mat-paginator
-  [length]="100"
-  [pageSize]="10"
-  [pageSizeOptions]="[5, 10, 25, 100]"
-  aria-label="Select page"
->
-</mat-paginator>
