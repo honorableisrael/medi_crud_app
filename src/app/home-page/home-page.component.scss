@@ -210,7 +210,8 @@ body {
 }
 @media (min-width: $media-breakpoint) {
   .mat-mdc-cell {
-    padding: 2rem;
+    padding: 2rem 1rem;
+    text-align: left;
   }
 }
 .pagecontent {

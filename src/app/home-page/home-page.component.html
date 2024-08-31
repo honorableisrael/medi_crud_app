@@ -12,8 +12,8 @@
     </ul>
   </div>
 </nav>
-<div class="top_wrapper">
-  <div>Placeholders</div>
+<div class="items-center top_wrapper">
+  <span class="text-[#667085] font-bold">Recent placeholders</span>
   <button class="btn-cls" mat-raised-button (click)="openCreateDialog()">
     Add Placeholder
   </button>
@@ -32,8 +32,8 @@
         <td mat-cell *matCellDef="let element">{{ element.body }}</td>
       </ng-container>
       <ng-container matColumnDef="id" class="col_style">
-        <th mat-header-cell *matHeaderCellDef>Action</th>
-        <td mat-cell *matCellDef="let element">
+        <th mat-header-cell *matHeaderCellDef class="text-left">Action</th>
+        <td mat-cell *matCellDef="let element" class="!text-right">
           <i
             class="material-icons bg-blue"
             title="Edit Row"
